@@ -241,10 +241,14 @@ async def send_daily_info():
 
 # ✅ التشغيل
 async def main():
-    await client.start()
+    await client.connect()
+    if not await client.is_user_authorized():
+        print("❌ الجلسة غير مصرح بها. قم بتسجيل الدخول يدويًا أولاً.")
+        return
     print("✅ البوت متصل بـ Telegram")
     scheduler.start()
     await client.run_until_disconnected()
+
 
 # ✅ بدء البوت
 if __name__ == "__main__":
